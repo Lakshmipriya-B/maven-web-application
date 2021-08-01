@@ -1,0 +1,32 @@
+node('master'){
+ or
+ node{
+ def mavenHome = tool name: "maven3.6.3"
+ stage('CheckoutCode'){
+ git branch: 'development', credentialsId: 'githubcredentials', url: 'https://github.com/Lakshmipriya-B/maven-web-application.git'
+ }
+ stage('Build'){
+ sh "${mavenHome}/bin/mvn clean package"
+ 
+ /*
+ stage('ExecuteSonarQubeReport'){
+ sh "${mavenHome}/bin/mvn sonar:sonar"
+ }
+  stage('UploadArtifactIntoArtifactRepository'){
+ sh "${mavenHome}/bin/mvn deploy"
+}
+ stage('DeployApplicationIntoTomcatServer')
+ {
+ sshagent(['283ee13f-0421-4aae-bdc7-d7ff3aaa0fa4']) {
+    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@52.66.87.194:/opt/apache-tomcat-9.0.50/webapps/"
+}
+ }
+ }
+  stage('SendEmailSuccessful'){
+ emailext body: '''Build over successfully
+
+Regards,
+Lakshmipriya.''', subject: 'Build over!!', to: 'lakshmipriya.bollujula.hyd@gmail.com,priyankha4@gmail.com,lakshmipriya.bollujula@gmail.com'
+}   
+*/
+ }
